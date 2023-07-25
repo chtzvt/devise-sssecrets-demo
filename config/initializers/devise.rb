@@ -1,34 +1,5 @@
 # frozen_string_literal: true
 
-require 'sssecrets'
-
-module Devise
-  mattr_accessor :friendly_token_types
-  mattr_accessor :friendly_token_org
-
-  # Configuration block to set multiple token prefixes with sssecrets types and org
-  def self.setup
-    self.friendly_token_types = {default: "ft"}
-    self.friendly_token_org = "dv" 
-    yield(self)
-  end
-
-  def self.friendly_token(**kwargs)
-    type = kwargs[:type] || :default
-    org = kwargs[:org] || friendly_token_org
-
-    generator = SimpleStructuredSecrets.new(org, sssecrets_type_for(type))
-    generator.generate()
-  end
-
-  private
-
-  def self.sssecrets_type_for(type)
-    friendly_token_types[type] || friendly_token_types[:default]
-  end
-end
-
-
 # Assuming you have not yet modified this file, each configuration option below
 # is set to its default value. Note that some are commented out while others
 # are not: uncommented lines are intended to protect your configuration from

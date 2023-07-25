@@ -75,3 +75,5 @@ end
 gem "devise", "~> 4.9"
 
 gem "sssecrets", "~> 1.0"
+
+gem "devise-sssecrets", "~> 0.1.0"
